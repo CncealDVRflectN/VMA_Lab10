@@ -232,6 +232,7 @@ public class Main {
         double prevA;
         double prevE;
         double max;
+        double t = calculateT();
         int maxl;
         int maxm;
         int counter = 0;
@@ -266,7 +267,8 @@ public class Main {
                 A.matrix[maxm][i] = -prevA * sin + A.matrix[maxm][i] * cos;
             }
             counter++;
-        } while (calculateT() > epsilon);
+            t -= 2 * Math.pow(max, 2);
+        } while (t > epsilon);
         for(int i = 0; i < n; i++){
             result.vector[i] = A.matrix[i][i];
         }
