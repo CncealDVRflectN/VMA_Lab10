@@ -252,19 +252,19 @@ public class Main {
             tgd = 2 * max / (A.matrix[maxl][maxl] - A.matrix[maxm][maxm]);
             cosd = 1 / Math.sqrt(1 + Math.pow(tgd, 2));
             cos = Math.sqrt((1 + cosd) / 2);
-            sin = Math.sqrt((1 - cosd) / 2) * Math.signum(tgd);
+            sin = -Math.sqrt((1 - cosd) / 2) * Math.signum(tgd);
             for (int i = 0; i < n; i++) {
                 prevA = A.matrix[i][maxl];
                 prevE = U.matrix[i][maxl];
-                A.matrix[i][maxl] = prevA * cos + A.matrix[i][maxm] * sin;
-                A.matrix[i][maxm] = -prevA * sin + A.matrix[i][maxm] * cos;
-                U.matrix[i][maxl] = prevE * cos + U.matrix[i][maxm] * sin;
-                U.matrix[i][maxm] = -prevE * sin + U.matrix[i][maxm] * cos;
+                A.matrix[i][maxl] = prevA * cos - A.matrix[i][maxm] * sin;
+                A.matrix[i][maxm] = prevA * sin + A.matrix[i][maxm] * cos;
+                U.matrix[i][maxl] = prevE * cos - U.matrix[i][maxm] * sin;
+                U.matrix[i][maxm] = prevE * sin + U.matrix[i][maxm] * cos;
             }
             for (int i = 0; i < n; i++) {
                 prevA = A.matrix[maxl][i];
-                A.matrix[maxl][i] = prevA * cos + A.matrix[maxm][i] * sin;
-                A.matrix[maxm][i] = -prevA * sin + A.matrix[maxm][i] * cos;
+                A.matrix[maxl][i] = prevA * cos - A.matrix[maxm][i] * sin;
+                A.matrix[maxm][i] = prevA * sin + A.matrix[maxm][i] * cos;
             }
             counter++;
             t -= 2 * Math.pow(max, 2);
